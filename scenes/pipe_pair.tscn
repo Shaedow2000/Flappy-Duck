@@ -1,0 +1,126 @@
+[gd_scene format=3 uid="uid://7wxfbdedilxt"]
+
+[ext_resource type="Script" uid="uid://bkjwco7gf06cj" path="res://scripts/pipe_pair.gd" id="1_m2bs7"]
+[ext_resource type="Texture2D" uid="uid://bueoojkms86ef" path="res://assets/bird2.png" id="1_t8jum"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_irq48"]
+size = Vector2(20, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m2bs7"]
+atlas = ExtResource("1_t8jum")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_irq48"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m2bs7")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t8jum"]
+atlas = ExtResource("1_t8jum")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c044d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t8jum")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c044d"]
+size = Vector2(20, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3hex"]
+atlas = ExtResource("1_t8jum")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cv054"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e3hex")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_000v6"]
+atlas = ExtResource("1_t8jum")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qs8gw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_000v6")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cv054"]
+size = Vector2(20, 44)
+
+[node name="PipePair" type="Node2D" unique_id=700074180]
+script = ExtResource("1_m2bs7")
+
+[node name="BottomPipe" type="Area2D" parent="." unique_id=476470004]
+position = Vector2(0, 50)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomPipe" unique_id=735478668]
+position = Vector2(0, 24)
+shape = SubResource("RectangleShape2D_irq48")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="BottomPipe" unique_id=1123810566]
+position = Vector2(0, 31.5)
+scale = Vector2(1, 5.5625)
+sprite_frames = SubResource("SpriteFrames_irq48")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="BottomPipe" unique_id=2125978762]
+position = Vector2(0, -20.5)
+scale = Vector2(1, 0.93749994)
+sprite_frames = SubResource("SpriteFrames_c044d")
+
+[node name="TopPipe" type="Area2D" parent="." unique_id=1000128976]
+position = Vector2(0, -50)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopPipe" unique_id=475357787]
+position = Vector2(0, -24)
+shape = SubResource("RectangleShape2D_c044d")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="TopPipe" unique_id=1755227598]
+position = Vector2(-2.255301e-07, -31.420237)
+rotation = 3.1415927
+scale = Vector2(1, 5.5724707)
+sprite_frames = SubResource("SpriteFrames_cv054")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="TopPipe" unique_id=803468098]
+position = Vector2(-3.9736273e-07, 20.545298)
+rotation = 3.1415927
+scale = Vector2(1, 0.95393276)
+sprite_frames = SubResource("SpriteFrames_qs8gw")
+
+[node name="Scoring" type="Area2D" parent="." unique_id=1198332032]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Scoring" unique_id=1441605167]
+shape = SubResource("RectangleShape2D_cv054")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1651089790]
+
+[connection signal="body_entered" from="BottomPipe" to="." method="_on_bottom_pipe_body_entered"]
+[connection signal="body_entered" from="TopPipe" to="." method="_on_top_pipe_body_entered"]
+[connection signal="body_entered" from="Scoring" to="." method="_on_scoring_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

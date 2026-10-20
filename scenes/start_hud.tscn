@@ -1,0 +1,98 @@
+[gd_scene format=4 uid="uid://d2hn6epkh8uy8"]
+
+[ext_resource type="Script" uid="uid://wj08qfm3nv33" path="res://scripts/start_hud.gd" id="1_2novg"]
+[ext_resource type="Texture2D" uid="uid://6xdh6syv1bc6" path="res://assets/bird.png" id="1_77qh8"]
+[ext_resource type="Texture2D" uid="uid://bueoojkms86ef" path="res://assets/bird2.png" id="2_2novg"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ghj5q"]
+texture = ExtResource("1_77qh8")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_irq48"]
+sources/0 = SubResource("TileSetAtlasSource_ghj5q")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ek3oe"]
+atlas = ExtResource("2_2novg")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_irq48"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ek3oe")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="StartHUD" type="CanvasLayer" unique_id=2003236489]
+script = ExtResource("1_2novg")
+
+[node name="Title" type="Label" parent="." unique_id=1839403398]
+z_index = 100
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -188.0
+offset_right = 188.0
+offset_bottom = 431.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 64
+text = "Flappy Duck"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=551059450]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0.3019608, 0.60784316, 0.9019608, 1)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1002366307]
+tile_map_data = PackedByteArray("AAAQAA8AAAABAAEAAAAsABEAAAABAAEAAAA1ABkAAAABAAEAAAA6AAkAAAABAAEAAAAEACQAAAABAAEAAAAYABMAAAABAAEAAAAdABsAAAABAAEAAAAKABgAAAABAAEAAAAdAAwAAAABAAEAAAAqAB0AAAADAAAAAAA5ACEAAAADAAAAAAA+ABEAAAADAAAAAAArAAgAAAADAAAAAAANAAYAAAADAAAAAAAZAAQAAAADAAAAAAARACEAAAADAAAAAAAcACMAAAADAAAAAAAEAAgAAAADAAAAAAAjACAAAAAAAAEAAAAjABgAAAAAAAEAAAA1ABUAAAAAAAEAAAAyAA0AAAAAAAEAAAA/ABgAAAAAAAEAAAAlABAAAAAAAAEAAAAGABAAAAAAAAEAAAALACIAAAAAAAEAAAASABoAAAAAAAEAAAAjAAcAAAAAAAEAAAA0AAYAAAAAAAEAAABAAAkAAAAAAAEAAAAvACMAAAAAAAEAAABBACIAAAAAAAEAAAA=")
+tile_set = SubResource("TileSet_irq48")
+
+[node name="Duck" type="AnimatedSprite2D" parent="." unique_id=1745454580]
+position = Vector2(563, 336)
+scale = Vector2(6, 6)
+sprite_frames = SubResource("SpriteFrames_irq48")
+
+[node name="Label" type="Label" parent="." unique_id=1901921135]
+z_index = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -83.0
+offset_top = -202.0
+offset_right = 83.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "Press any key to start"
+
+[node name="Timer" type="Timer" parent="." unique_id=1198468261]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://b8nimb5anw8sy"]
+
+[ext_resource type="Script" uid="uid://kyd38e3qesty" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="Texture2D" uid="uid://6xdh6syv1bc6" path="res://assets/bird.png" id="2_g2els"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c044d"]
+radius = 3.0
+height = 12.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhqgy"]
+atlas = ExtResource("2_g2els")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_irq48"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhqgy")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
+atlas = ExtResource("2_g2els")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c044d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2els")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D" unique_id=1154485043]
+z_index = 100
+script = ExtResource("1_g2els")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=961867976]
+rotation = 1.5707964
+scale = Vector2(1.2, 1.2)
+shape = SubResource("CapsuleShape2D_c044d")
+
+[node name="AliveDuck" type="AnimatedSprite2D" parent="." unique_id=283733303]
+position = Vector2(0, -6)
+scale = Vector2(1.2, 1.2)
+sprite_frames = SubResource("SpriteFrames_irq48")
+
+[node name="DeadBody" type="AnimatedSprite2D" parent="." unique_id=600367186]
+position = Vector2(0, -6)
+scale = Vector2(1.2, 1.2)
+sprite_frames = SubResource("SpriteFrames_c044d")
